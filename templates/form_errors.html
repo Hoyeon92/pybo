@@ -1,0 +1,20 @@
+<!--로그인 실패시, 왜 실패했는지 알려주는 역할 // 필드 오류, 넌필드 오류 모두를 표시하기 위해 삽입되는 템플릿-->
+
+<!--필드 오류 : 사용자가 입력한 필드 값에 대한 오류로 값이 누락되었거나 필드의 형식이 일치하지 않는 경우에 발생-->
+<!--넌필드 오류 : 필드 값과는 상관없이 다른 이유로 발생하는 오류-->
+{% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}     <!-- 필드 오류를 출력 -->
+            <div class="alert alert-danger">
+                <strong>{{ field.label }}</strong>
+                {{ error }}
+            </div>
+        {% endfor %}
+    {% endfor %}
+    {% for error in form.non_field_errors %}     <!-- 넌필드 오류를 출력 -->
+        <div class="alert alert-danger">
+            <strong>{{ error }}</strong>
+        </div>
+    {% endfor %}
+{% endif %}
+
